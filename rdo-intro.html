@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      /* Slideshow styles */
+    </style>
+  </head>
+  <body>
+     <textarea id="source">
+      <!-- Slideshow Markdown -->
+
+# RDO Introduction For Contributors
+
+
+
+
+
+Alan Pevec, Red Hat, OpenStack Engineering
+
+
+
+
+
+Kilo Design Summit, Paris, November 2014
+
+---
+
+# RDO Introduction For Contributors
+## History - OpenStack in Fedora
+
+* openstack-nova Diablo imported to Fedora 16 in August 2011 [1]
+
+* Until now we were able to keep Fedora/OpenStack release 1:1 [2]
+
+
+    Fedora 16 includes OpenStack Diablo
+    Fedora 17 includes OpenStack Essex
+    Fedora 18 includes OpenStack Folsom
+    Fedora 19 includes OpenStack Grizzly
+    Fedora 20 includes OpenStack Havana
+    Fedora 21 will include OpenStack Icehouse
+    Fedora 22 will include OpenStack Juno
+
+
+[1]: http://pkgs.fedoraproject.org/cgit/openstack-nova.git/commit/?id=430fcdb4f519438525bc3bbccc6480dcbce8bfd8
+[2]: https://fedoraproject.org/wiki/OpenStack#OpenStack
+
+---
+
+# RDO Introduction For Contributors
+## History - OpenStack in EPEL
+
+
+* Nova added to EPEL6 in November 2011
+
+* complete Essex update in April 2012 [1]
+
+* incompatible Folsom update in October 2012 [2] sparked conversations
+  leading to the creation of RDO [3]
+
+* RDO started with Grizzly in April 2013
+
+
+[1]: https://admin.fedoraproject.org/updates/FEDORA-EPEL-2012-5719
+[2]: https://admin.fedoraproject.org/updates/FEDORA-EPEL-2012-13088
+[3]: https://openstack.redhat.com/
+
+---
+
+# RDO Introduction For Contributors
+## Previous Repository Setup
+
+EPEL update policy does not allow incompatbile upgrades, so we had to
+keep OpenStack Folsom in EPEL6.
+
+Inofficial branches el6-* in pkgs.fedoraproject.org were created:
+* el6-grizzly from f19
+* el6-havana from f20
+* el6-icehouse from f21
+
+---
+
+# RDO Introduction For Contributors
+## Current Repository Setup
+
+OpenStack Folsom was retired from EPEL6 and all el6* branches are now blocked.
+
+In order to keep packaging in pkgs.fedoraproject.org EL6 changes were merged
+to the corresponding Fedora branch, f20 for Havana, f21 for Icehouse:
+
+    %if 0%{?rhel} == 6
+    Requires(post):   chkconfig
+    Requires(postun): initscripts
+    ...
+    %else
+    Requires(post): systemd
+    ...
+    %endif
+
+---
+
+# RDO Introduction For Contributors
+## Current Buildsystem Setup
+
+* RDO Fedora is built in Koji, Fedora N+1 builds are made available
+
+  for Fedora N e.g. RDO Icehouse for Fedora 20 are Fedora 21 builds
+
+
+
+* RDO EL is currently built in Copr, example for Icehouse EL7 [1]
+
+  RDO EL depends on EPEL.
+
+
+
+
+[1]: https://copr.fedoraproject.org/coprs/jruzicka/rdo-icehouse-epel-7/
+
+---
+
+# RDO Introduction For Contributors
+## rdopkg update YAML
+
+---
+
+# RDO Introduction For Contributors
+## rdopkg CI
+
+* Phase1
+* Phase2
+* stage
+* prod
+
+
+---
+
+# RDO Introduction For Contributors
+## Delorean
+
+https://etherpad.openstack.org/p/delorean-packages
+
+    </textarea>
+     <script type="text/javascript" src="remark.js">
+    </script>
+    <script type="text/javascript">
+       var slideshow = remark.create();
+    </script>
+  </body>
+</html>
