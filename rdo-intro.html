@@ -12,16 +12,10 @@
 # RDO Introduction For Contributors
 
 
-
-
-
 Alan Pevec, Red Hat, OpenStack Engineering
 
 
-
-
-
-Kilo Design Summit, Paris, November 2014
+Kilo Summit, Paris, November 2014
 
 ---
 
@@ -122,6 +116,7 @@ to the corresponding Fedora branch, f20 for Havana, f21 for Icehouse:
 # RDO Introduction For Contributors
 ## rdopkg update YAML
 
+RDO package builds are grouped into updates and described in YAML files.
 Example https://github.com/redhat-openstack/rdo-update/blob/master/updates/00fz.yml
 
     ---
@@ -138,18 +133,27 @@ Example https://github.com/redhat-openstack/rdo-update/blob/master/updates/00fz.
         repo: juno
         dist: epel-7
 
-
-
 ---
 
 # RDO Introduction For Contributors
 ## rdopkg CI
 
-* Phase1
-* Phase2
-* stage
-* prod
+Updates are pushed as Gerrit updates which trigger a series of CI jobs.
 
+* Phase1
+
+  Install packages from update YAML on the snapshot image with
+  the all-in-one OpenStack installation, starts services and runs
+  Tempest smoketest. Tests basic package sanity and upgrade.
+
+* Phase2
+
+  Runs from-the-scratch all-in-one installation with all the packages
+  which passed Phase1. Tests package interaction among queued updates.
+
+* stage daily jobs and on-demand before pushing queued updates list
+
+* production daily job to catch regressions in dependency changes
 
 ---
 
@@ -157,6 +161,27 @@ Example https://github.com/redhat-openstack/rdo-update/blob/master/updates/00fz.
 ## Delorean
 
 https://etherpad.openstack.org/p/delorean-packages
+
+Tracks upstream trunk i.e. currently Kilo.
+
+Breaks when upstream change requires packaging changes and alerts the package
+owner as defined in https://github.com/redhat-openstack/rdoinfo
+
+Going forward, all packaging changes will be done in Delorean packages first,
+and merged to Fedora Rawhide around milestone times.
+
+
+---
+
+# RDO Introduction For Contributors
+## Next Steps
+
+* rdopkg on github
+
+* rdo-update on gerrithub
+
+* rdopkg CI on a public Jenkins instance
+
 
     </textarea>
      <script type="text/javascript" src="remark.js">
